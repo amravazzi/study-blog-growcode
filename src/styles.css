@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.post-card {
+  display: flex;
+  margin-top: 30px;
+}
+
+.post-preview-content {
+
+}
+
+
+.post-author {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.post-title {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+
+.author-avatar {
+  width: 20px;
+}
+
+.post-body p {
+  width: 380px;
+  /* não quebra o texto, deixando em uma única linha */
+  white-space: nowrap;
+  /* não permite que "dê scroll" */
+  overflow: hidden;
+  /* cropa o texto em função do tamanho do container, e adiciona reticências */
+  text-overflow: ellipsis;
+}
