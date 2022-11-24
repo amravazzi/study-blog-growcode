@@ -2,6 +2,14 @@
   --main-background: #FFF;
   --button-primary: #1e8f49;
   --text-primary: #000;
+  --divider-primary: #EEE;
+}
+
+[data-theme="night"] {
+  --main-background: #000;
+  --button-primary: #8e05c2;
+  --text-primary: #FFF;
+  --divider-primary: #323232;
 }
 
 * {
@@ -14,8 +22,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--main-background);
-  color: var(--text-primary);
 }
 
 .main-container {
@@ -23,6 +29,8 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+  background-color: var(--main-background);
+  color: var(--text-primary);
 }
 
 .main-container header  {
@@ -33,13 +41,22 @@ body {
   margin-bottom: 40px;
 }
 
-.main-container header button {
+.btn {
   border-radius: 50px;
-  border: none;
-  padding: 0 15px;
-  color: #FFF;
+  padding: 10px 15px;
   font-weight: bolder;
+  cursor: pointer;
+}
+
+.btn.primary {
+  border: none;
+  color: #FFF;
   background-color: var(--button-primary);
+}
+
+.btn.secondary {
+  border: 2px solid var(--button-primary);
+  background-color: #FFF;
 }
 
 .post-card {
@@ -47,11 +64,12 @@ body {
   display: flex;
   padding-top: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px #EEE solid;
+  border-bottom: 1px var(--divider-primary) solid;
+  cursor: pointer;
 }
 
 .post-card:first-child {
-  border-top: 1px #EEE solid;
+  border-top: 1px var(--divider-primary) solid;
 }
 
 .post-preview-content {
@@ -85,4 +103,31 @@ body {
   overflow: hidden;
   /* cropa o texto em função do tamanho do container, e adiciona reticências */
   text-overflow: ellipsis;
+}
+
+.fullscreen-post {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-background);
+  border-top: 2px solid var(--button-primary);
+  z-index: 99;
+}
+
+.post-close {
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 2px 8px;
+  padding-top: 3px;
+  font-size: 20px;
+}
+
+.post-content {
+  margin: 65px 50px;
+}
+
+.post-content h1 {
+  margin-bottom: 30px;
 }
