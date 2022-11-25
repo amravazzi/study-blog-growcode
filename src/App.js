@@ -1,9 +1,11 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
+import Header from "./Components/Header";
+import Modal from "./Components/Modal";
 
 function App() {
-  const [posts, setPosts] = useState([]);
   const [theme, setTheme] = useState("day");
+  const [posts, setPosts] = useState([]);
   const [isPostOpen, setIsPostOpen] = useState(false);
   const [currentPostIndex, setCurrentPostIndex] = useState("");
 
@@ -23,10 +25,6 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  function handleTheme() {
-    setTheme((theme) => (theme === "night" ? "day" : "night"));
-  }
-
   function tooglePostModal() {
     setIsPostOpen((prev) => !prev);
   }
@@ -36,21 +34,20 @@ function App() {
     setCurrentPostIndex(postIndex);
   }
 
+  function handleTheme() {
+    setTheme((theme) => (theme === "night" ? "day" : "night"));
+  }
+
   return (
     <div className="main-container" data-theme={theme}>
-      <header>
-        <h1>Lorem Ipsum Blog</h1>
-        <button className="btn primary">Novo Post</button>
-        <button className="btn primary" onClick={() => handleTheme()}>
-          {theme === "night" ? "Day" : "Night"} Mode
-        </button>
-      </header>
+      <Header handleTheme={handleTheme} />
       <main>
         {posts.map((post, i) => (
           <section
             className="post-card"
             id={post.id}
             onClick={() => handleOpenPost(i)}
+            key={post.id}
           >
             <div className="post-preview-content">
               <div className="post-author">
@@ -77,18 +74,18 @@ function App() {
       </main>
 
       {isPostOpen ? (
-        <section className="fullscreen-post">
+        <Modal
+          posts={posts}
+          postIndex={currentPostIndex}
+          alt={"qualquer coisa"}
+        >
           <button
             onClick={() => tooglePostModal()}
             className="btn secondary post-close"
           >
             &times;
           </button>
-          <div className="post-content">
-            <h1>{posts[currentPostIndex].title}</h1>
-            <p>{posts[currentPostIndex].body}</p>
-          </div>
-        </section>
+        </Modal>
       ) : null}
     </div>
   );
