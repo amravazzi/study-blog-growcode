@@ -1,13 +1,20 @@
 import { useState } from "react";
+import Button from "./Button"
 
-function Header({ theme = "day", handleTheme = () => {} }) {
+function Header({
+  theme = "day",
+  handleTheme = () => {},
+  toogleNewPostModal = () => {},
+}) {
   return (
     <header>
       <h1>Lorem Ipsum Blog</h1>
-      <button className="btn primary">Novo Post</button>
-      <button className="btn primary" onClick={() => handleTheme()}>
+      <Button className="primary" alt="Novo post" handleClick={toogleNewPostModal}>
+        Novo Post
+      </Button>
+      <Button className="primary" handleClick={handleTheme}>
         {theme === "night" ? "Day" : "Night"} Mode
-      </button>
+      </Button>
     </header>
   );
 }

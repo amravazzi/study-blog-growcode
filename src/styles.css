@@ -3,6 +3,7 @@
   --button-primary: #1e8f49;
   --text-primary: #000;
   --divider-primary: #EEE;
+  --button-disabled: #6bd35d;
 }
 
 [data-theme="night"] {
@@ -130,4 +131,33 @@ body {
 
 .post-content h1 {
   margin-bottom: 30px;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 30% 15%;
+}
+
+.post-form fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.post-form input, textarea {
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.btn.primary:disabled {
+  background-color: var(--button-disabled);
+  cursor:not-allowed;
+}
+
+.post-form textarea {
+  max-height: 150px;
+  min-height: 150px;
 }

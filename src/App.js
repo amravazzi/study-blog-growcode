@@ -2,11 +2,14 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import Modal from "./Components/Modal";
+import Button from "./Components/Button";
+import NewPostModal from "./Components/NewPostModal";
 
 function App() {
   const [theme, setTheme] = useState("day");
   const [posts, setPosts] = useState([]);
   const [isPostOpen, setIsPostOpen] = useState(false);
+  const [isNewPostOpen, setIsNewPostOpen] = useState(false);
   const [currentPostIndex, setCurrentPostIndex] = useState("");
 
   useEffect(() => fetchPosts(), []);
@@ -38,9 +41,20 @@ function App() {
     setTheme((theme) => (theme === "night" ? "day" : "night"));
   }
 
+  function toogleNewPostModal() {
+    setIsNewPostOpen((prev) => !prev);
+  }
+
+  function onSubmitPost(post) {
+    setPosts((prev) => [post, ...prev]);
+  }
+
   return (
     <div className="main-container" data-theme={theme}>
-      <Header handleTheme={handleTheme} />
+      <Header
+        handleTheme={handleTheme}
+        toogleNewPostModal={toogleNewPostModal}
+      />
       <main>
         {posts.map((post, i) => (
           <section
@@ -86,6 +100,13 @@ function App() {
             &times;
           </button>
         </Modal>
+      ) : null}
+
+      {isNewPostOpen ? (
+        <NewPostModal
+          toogleNewPostModal={toogleNewPostModal}
+          onSubmitPost={onSubmitPost}
+        />
       ) : null}
     </div>
   );
