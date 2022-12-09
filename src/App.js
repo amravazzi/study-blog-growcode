@@ -1,32 +1,22 @@
 import "./styles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Header from "./Components/Header";
 import Modal from "./Components/Modal";
 import Button from "./Components/Button";
 import NewPostModal from "./Components/NewPostModal";
+import useTheme from "./Hooks/useTheme";
+import { AppContext } from "./Contexts/AppContext";
 
 function App() {
-  const [theme, setTheme] = useState("day");
-  const [posts, setPosts] = useState([]);
+  const [theme, handleTheme] = useTheme();
   const [isPostOpen, setIsPostOpen] = useState(false);
   const [isNewPostOpen, setIsNewPostOpen] = useState(false);
   const [currentPostIndex, setCurrentPostIndex] = useState("");
+  const { posts, fetchPosts, onSubmitPost } = useContext(AppContext);
 
   useEffect(() => fetchPosts(), []);
 
-  useEffect(() => console.log(posts), [posts]);
-
-  function fetchPosts() {
-    // fetch ~= axios
-    // <Promise>.then().catch() <=> try-catch
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        data.length = 10;
-        setPosts(data);
-      })
-      .catch((err) => console.log(err));
-  }
+  useEffect(() => console.log({ posts }), [posts]);
 
   function tooglePostModal() {
     setIsPostOpen((prev) => !prev);
@@ -37,21 +27,14 @@ function App() {
     setCurrentPostIndex(postIndex);
   }
 
-  function handleTheme() {
-    setTheme((theme) => (theme === "night" ? "day" : "night"));
-  }
-
   function toogleNewPostModal() {
     setIsNewPostOpen((prev) => !prev);
-  }
-
-  function onSubmitPost(post) {
-    setPosts((prev) => [post, ...prev]);
   }
 
   return (
     <div className="main-container" data-theme={theme}>
       <Header
+        theme={theme}
         handleTheme={handleTheme}
         toogleNewPostModal={toogleNewPostModal}
       />

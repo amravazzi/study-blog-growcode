@@ -22,12 +22,13 @@ function NewPostModal({
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
+      .then((response) => response.json())
+      .then((response) => {
         setIsPublishingPost(false);
-        onSubmitPost(res);
+        onSubmitPost(response);
         toogleNewPostModal();
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
