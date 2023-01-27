@@ -137,7 +137,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 70%;
-  margin: 30% 15%;
+  margin: 5% 15%;
 }
 
 .post-form fieldset {

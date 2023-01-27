@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { AppContext } from "./AppContext";
+import App from "../App";
 
-function AppContextProvider({ chidren }) {
+function AppContextProvider() {
   const [posts, setPosts] = useState([]);
-  console.log({ chidren });
 
   function fetchPosts() {
     // fetch ~= axios
     // <Promise>.then().catch() <=> try-catch
     fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         data.length = 10;
         setPosts(data);
@@ -23,7 +25,7 @@ function AppContextProvider({ chidren }) {
 
   return (
     <AppContext.Provider value={{ posts, fetchPosts, onSubmitPost }}>
-      {chidren}
+      <App />
     </AppContext.Provider>
   );
 }
